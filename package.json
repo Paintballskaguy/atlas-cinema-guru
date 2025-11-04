@@ -3,6 +3,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbo",
+    "dev:clean": "rm -rf .next node_modules/.cache && next dev --turbo",
     "start": "next start"
   },
   "dependencies": {
@@ -14,14 +15,15 @@
     "bcryptjs": "3.0.2",
     "clsx": "2.1.1",
     "kysely": "^0.27.5",
+    "lucide-react": "^0.552.0",
     "next": "15.2.0",
     "next-auth": "5.0.0-beta.25",
     "postcss": "8.5.3",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tailwindcss": "^4.0.9",
     "tailwindcss-animate": "^1.0.7",
-    "use-debounce": "^10.0.4"
+    "use-debounce": "^10.0.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
