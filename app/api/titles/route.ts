@@ -3,7 +3,7 @@ import { fetchGenres, fetchTitles } from "@/lib/data";
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * GET /api/titles
+ * GET /api/title
  */
 export const GET = auth(async (req: NextRequest) => {
   //@ts-ignore
@@ -30,6 +30,6 @@ export const GET = auth(async (req: NextRequest) => {
   const title = await fetchTitles(page, minYear, maxYear, query, genres, email);
 
   return NextResponse.json({
-    title: title,
+    titles: title,
   });
 });
