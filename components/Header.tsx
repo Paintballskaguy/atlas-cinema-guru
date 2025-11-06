@@ -23,7 +23,6 @@ export default async function Header() {
         </span>
         <form
           action={async () => {
-            "use server";
             await signOut();
           }}
         >
