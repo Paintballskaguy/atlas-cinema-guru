@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth";
 import Image from "next/image";
+import { logoutAction } from "@/lib/actions";
 
 export default async function Header() {
   const session = await auth();
@@ -21,10 +22,7 @@ export default async function Header() {
         <span className="text-[#00003c] text-sm">
           Welcome, {session?.user?.email}
         </span>
-        <form
-          action={async () => {
-            await signOut();
-          }}
+        <form action={logoutAction}
         >
           <button
             type="submit"

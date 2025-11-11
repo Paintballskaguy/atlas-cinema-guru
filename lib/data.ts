@@ -1,3 +1,5 @@
+"use server";
+
 import { sql } from "@vercel/postgres";
 import { Question, User } from "./definitions";
 import { db } from "./db";

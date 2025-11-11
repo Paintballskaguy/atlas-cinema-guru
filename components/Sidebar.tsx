@@ -4,11 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+
 type Activity = {
   id: string;
-  action: string;
-  title: string;
-  created_at: string;
+  timestamp: Date;
+  activity: "FAVORITED" | "WATCH_LATER";
+  title: string; 
 };
 
 type SidebarProps = {
