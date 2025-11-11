@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-
 type Activity = {
   id: string;
   timestamp: Date;
@@ -83,14 +82,18 @@ export default function Sidebar({ activities }: SidebarProps) {
     },
   ];
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
+  const formatDate = (timestamp: Date) => {
+    // Ensure timestamp is a Date object
+    const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
+    
+    // Format as "M/D/YYYY, H:MM:SS PM"
     return date.toLocaleString("en-US", {
       month: "numeric",
       day: "numeric",
       year: "numeric",
       hour: "numeric",
       minute: "2-digit",
+      second: "2-digit",
       hour12: true,
     });
   };
@@ -129,25 +132,33 @@ export default function Sidebar({ activities }: SidebarProps) {
         })}
       </nav>
 
-      {isExpanded && (
+      {/* Latest Activities Section */}
+      {isExpanded && activities && activities.length > 0 && (
         <div className="px-4 pt-6 border-t border-[#00003c]/20">
-          <h3 className="text-[#00003c] font-bold mb-4">Latest Activities</h3>
+          <h3 className="text-[#00003c] font-bold mb-4 text-lg">Latest Activities</h3>
           <div className="space-y-3 overflow-y-auto max-h-[calc(100vh-24rem)]">
             {activities.map((activity) => (
               <div
                 key={activity.id}
-                className="text-xs text-[#00003c] bg-white/20 rounded p-2"
+                className="text-[#00003c] text-sm"
               >
-                <div className="text-[10px] opacity-75">
-                  {formatDate(activity.created_at)}
+                {/* Date and time */}
+                <div className="text-xs opacity-70 mb-1">
+                  {formatDate(activity.timestamp)}
                 </div>
-                <div className="mt-1">
-                  {activity.action === "favorited" && "Favorited "}
-                  {activity.action === "added_to_watch_later" &&
-                    "Added "}
-                  <span className="font-bold">{activity.title}</span>
-                  {activity.action === "added_to_watch_later" &&
-                    " to watch later"}
+                
+                {/* Activity description */}
+                <div>
+                  {activity.activity === "FAVORITED" && (
+                    <>
+                      Favorited <span className="font-bold">{activity.title}</span>
+                    </>
+                  )}
+                  {activity.activity === "WATCH_LATER" && (
+                    <>
+                      Added <span className="font-bold">{activity.title}</span> to watch later
+                    </>
+                  )}
                 </div>
               </div>
             ))}
